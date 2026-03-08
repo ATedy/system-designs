@@ -1,0 +1,19 @@
+%% Message Queue - Producer, Queue, Consumer
+%% Open in https://mermaid.live or any Mermaid viewer
+
+flowchart LR
+    subgraph Producer["Producer (Spring)"]
+        P[Order Service]
+    end
+
+    subgraph Queue["Message Broker (RabbitMQ)"]
+        Q[Queue]
+    end
+
+    subgraph Consumer["Consumer (Spring)"]
+        C[Notification Service]
+    end
+
+    P -->|"1. Publish message"| Q
+    Q -->|"2. Deliver message"| C
+    C -->|"3. Process"| C
